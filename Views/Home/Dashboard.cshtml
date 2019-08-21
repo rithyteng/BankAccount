@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    @model List<Transaction>
+    <h4>Welcome, @ViewBag.Name</h4>
+    <h5> Balance = @ViewBag.Sum</h5>
+    @{
+        @if(ViewBag.Error != null){
+
+            <h1> @ViewBag.Error </h1>
+            
+        }
+    }
+        
+    <form asp-action="Money" asp-controller="Home" method="post">
+        
+        <select name="Amount">
+            <option value="300">300</option>
+            <option value="200">200</option>
+            <option value="100">100</option>
+            <option value="-100">-100</option>
+            <option value="-200">-200</option>
+            <option value="-300">-300</option>
+        </select>
+        <button>Submit</button>
+    </form>
+    <table>
+        <tr>
+            <td>Amount </td>
+            <td>Date</td>
+        </tr>
+        @foreach(var i in Model){
+            <tr>
+                <th>@Math.Round(i.Amount,2)</th>
+                <th> @i.Created_At</th>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>
